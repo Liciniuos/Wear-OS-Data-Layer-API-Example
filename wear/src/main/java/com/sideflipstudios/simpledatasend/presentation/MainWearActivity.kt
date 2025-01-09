@@ -39,8 +39,7 @@ class MainWearActivity : ComponentActivity(), DataClient.OnDataChangedListener {
 
         // Create return data
         val returnData = ReturnClass(
-            sentData,
-            action
+            sentData, action
         )
 
         // Use CustomParcelUtils to create a ByteArray suitable for the data layer
@@ -91,7 +90,21 @@ class MainWearActivity : ComponentActivity(), DataClient.OnDataChangedListener {
         if (data != null) {
             // Display task name and time
             binding.tvName.text = data.name
-            binding.tvTime.text = "${data.dateTime.hour}:${data.dateTime.minute}"
+            binding.tvTime.text = if (data.dateTime.hour < 12) {
+                getString(
+                    R.string.txt12Time,
+                    data.dateTime.hour.toString().padStart(2, '0'),
+                    data.dateTime.minute.toString().padStart(2, '0'),
+                    "AM"
+                )
+            } else {
+                getString(
+                    R.string.txt12Time,
+                    (data.dateTime.hour - 12).toString().padStart(2, '0'),
+                    data.dateTime.minute.toString().padStart(2, '0'),
+                    "PM"
+                )
+            }
             // Make the two buttons visible
             binding.llButtons.visibility = View.VISIBLE
 
@@ -107,13 +120,6 @@ class MainWearActivity : ComponentActivity(), DataClient.OnDataChangedListener {
                     tempDateTime.hour.toString().padStart(2, '0'),
                     tempDateTime.minute.toString().padStart(2, '0'),
                     "AM"
-                )
-            } else if (tempDateTime.hour == 12) {
-                getString(
-                    R.string.txt12Time,
-                    tempDateTime.hour.toString().padStart(2, '0'),
-                    tempDateTime.minute.toString().padStart(2, '0'),
-                    "PM"
                 )
             } else {
                 getString(
