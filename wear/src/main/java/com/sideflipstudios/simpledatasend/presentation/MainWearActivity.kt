@@ -97,6 +97,13 @@ class MainWearActivity : ComponentActivity(), DataClient.OnDataChangedListener {
                     data.dateTime.minute.toString().padStart(2, '0'),
                     "AM"
                 )
+            }else if (data.dateTime.hour == 12) {
+                getString(
+                    R.string.txt12Time,
+                    data.dateTime.hour.toString().padStart(2, '0'),
+                    data.dateTime.minute.toString().padStart(2, '0'),
+                    "PM"
+                )
             } else {
                 getString(
                     R.string.txt12Time,
@@ -121,7 +128,14 @@ class MainWearActivity : ComponentActivity(), DataClient.OnDataChangedListener {
                     tempDateTime.minute.toString().padStart(2, '0'),
                     "AM"
                 )
-            } else {
+            }else if (tempDateTime.hour == 12) {
+                getString(
+                    R.string.txt12Time,
+                    tempDateTime.hour.toString().padStart(2, '0'),
+                    tempDateTime.minute.toString().padStart(2, '0'),
+                    "PM"
+                )
+            }  else {
                 getString(
                     R.string.txt12Time,
                     (tempDateTime.hour - 12).toString().padStart(2, '0'),
