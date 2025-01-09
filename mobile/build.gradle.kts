@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
 }
 
@@ -50,7 +50,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    wearApp(project(":wear"))
+
+    implementation (project(":common"))
+
+    implementation (libs.androidx.preference.ktx)
+    implementation(libs.gson)
 
     implementation (libs.play.services.wearable)
 }

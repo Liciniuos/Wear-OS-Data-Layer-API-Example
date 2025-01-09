@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
 }
 
@@ -11,7 +11,8 @@ android {
     defaultConfig {
         applicationId = "com.sideflipstudios.simpledatasend"
         minSdk = 30
-        targetSdk = 35
+        // Google play does not yet support targetSDK 35 (9.JAN.2025) but reducing compile SDK causes issues with some dependencies
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
         vectorDrawables {
@@ -65,6 +66,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     wearApp(project(":wear"))
+    implementation (project(":common"))
 
     implementation(libs.androidx.wear)
 
