@@ -5,38 +5,31 @@ import com.google.android.gms.wearable.DataEvent
 import com.google.android.gms.wearable.DataEventBuffer
 import com.google.android.gms.wearable.DataMapItem
 import com.google.android.gms.wearable.WearableListenerService
+import com.sideflipstudios.common.CustomParcelUtils
+import com.sideflipstudios.common.ReturnClass
 
 class TaskUpdateService : WearableListenerService() {
 
     override fun onDataChanged(dataEvents: DataEventBuffer) {
-        Log.i("AAA","onDataChanged called")
-
         for (event in dataEvents) {
-            Log.i("AAA",event.dataItem.uri.path.toString())
+            //if the data is new and is on the path relevant to the mobile app
+            if (event.type == DataEvent.TYPE_CHANGED && event.dataItem.uri.path == "/mobile_update") {
 
-            if (event.type == DataEvent.TYPE_CHANGED && event.dataItem.uri.path == "/task_update") {
+                // Retrieve the byte array from the DataMap
                 val dataMap = DataMapItem.fromDataItem(event.dataItem).dataMap
-                val isMark = dataMap.getBoolean("is_mark")
+                val byteArray = dataMap.getByteArray("return_class")
 
-                Log.i("AAA",isMark.toString())
+                if (byteArray != null) {
+                    // Deserialize the byte array into a SendClass object
+                    val syncedData: ReturnClass = CustomParcelUtils.fromByteArray(byteArray)
 
-                // Handle the mark or delete action
-                if (isMark) {
-                    markTask()
-                } else {
-                    deleteTask()
+                    // Your apps functionality
+                    Log.i(
+                        "SendData",
+                        "Watch returned: ${syncedData.returnData.name} Action: ${syncedData.action}"
+                    )
                 }
             }
         }
-    }
-
-    private fun markTask() {
-        // Handle marking the task
-        Log.i("AAA", "Task marked")
-    }
-
-    private fun deleteTask() {
-        // Handle deleting the task
-        Log.i("AAA", "Task deleted")
     }
 }

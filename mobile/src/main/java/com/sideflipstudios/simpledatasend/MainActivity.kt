@@ -1,23 +1,15 @@
 package com.sideflipstudios.simpledatasend
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.wearable.DataClient
-import com.google.android.gms.wearable.DataEvent
-import com.google.android.gms.wearable.DataMapItem
-import com.sideflipstudios.simpledatasend.databinding.ActivityMainBinding
 import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
+import com.sideflipstudios.common.CustomParcelUtils
+import com.sideflipstudios.common.SendClass
+import com.sideflipstudios.simpledatasend.databinding.ActivityMainBinding
 import java.time.LocalDateTime
-import java.time.ZoneId
 
 class MainActivity : AppCompatActivity() {
-
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,18 +25,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun sendDataToWear(data: String) {
 
-        val temp = MinimalTask(
-            absolute = false,
+        //Create example of SendClass
+        val temp = SendClass(
+            id = 0,
             name = data,
-            dateTime = LocalDateTime.now().minusMinutes(20),
-            zone = ZoneId.systemDefault().id
+            dateTime = LocalDateTime.now()
         )
 
-
+        // Use CustomParcelUtils to create a ByteArray suitable for the data layer
         val byteArray = CustomParcelUtils.toByteArray(temp)
 
+        // Create a DataMapRequest with a specified path ("/sync_data")
+        // '/sync_data' can be changed as long as it is consistent  in all usages
         val dataMap = PutDataMapRequest.create("/sync_data")
+
+        // Add the serialized data (ByteArray) to the DataMap with a key ("sync_key")
+        //Again the key can be changed as long as it is consistent
         dataMap.dataMap.putByteArray("sync_key", byteArray)
+
+        // Convert the DataMap into a PutDataRequest and send to the watch
         val request = dataMap.asPutDataRequest()
         Wearable.getDataClient(this).putDataItem(request)
     }

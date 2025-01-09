@@ -15,12 +15,15 @@
         <uses-library
             android:name="com.google.android.wearable"
             android:required="true" />
+
+        <!--In it's current state, the watch app cannot provide any functionality to a user without a mobile app
+         thus standalone is false-->
         <meta-data
             android:name="com.google.android.wearable.standalone"
-            android:value="true" />
+            android:value="false" />
 
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.MainWearActivity"
             android:exported="true"
             android:taskAffinity=""
             android:theme="@style/MainActivityTheme.Starting">
@@ -34,6 +37,9 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
+                <!--While com.google.android.gms.wearable.NODE_CHANGED works fine for the mobile app;
+                triggering task update service whether the app is open or not,
+                it doesn't trigger DataLayerListenerService if the watch app is not open-->
                 <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
             </intent-filter>
         </service>

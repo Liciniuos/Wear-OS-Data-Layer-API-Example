@@ -15,9 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:minLines="1"
+            android:minLines="3"
             android:maxLines = "3"
-            android:text="Wipe and bail windows"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
@@ -26,7 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="In"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
@@ -36,6 +34,7 @@
             android:layout_weight="1"/>
 
         <LinearLayout
+            android:id="@+id/llButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
