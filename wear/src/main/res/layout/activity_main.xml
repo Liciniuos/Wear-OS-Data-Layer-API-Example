@@ -10,28 +10,30 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!-- "@style/TextAppearance.MaterialComponents.Body1" sets the font size and thickness
+        in compliance with the text size set by users in the settings-->
         <TextView
             android:id="@+id/tvName"
+            style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:maxLines="3"
             android:minLines="3"
-            android:maxLines = "3"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/tvTime"
+            style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+            android:textColor="#FFFFFF" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <LinearLayout
             android:id="@+id/llButtons"
@@ -41,37 +43,38 @@
 
             <Space
                 android:layout_width="15dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
+            <!-- 48x48dp is the minimum touch surface size for android apps-->
             <ImageButton
                 android:id="@+id/btnMark"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/white_round_button_background"
-                android:src="@drawable/ic_mark"
-                android:tint="@color/mark"
+                android:background="@drawable/ripple_white_round_button"
                 android:padding="8dp"
-                android:scaleType="centerInside" />
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_mark"
+                android:tint="@color/mark" />
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <ImageButton
                 android:id="@+id/btnDelete"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/black_round_button_background"
-                android:src="@drawable/ic_delete"
-                android:tint="@color/delete"
+                android:background="@drawable/ripple_black_round_button"
                 android:padding="8dp"
                 android:scaleType="centerInside"
+                android:src="@drawable/ic_delete"
+                android:tint="@color/delete"
                 tools:ignore="RtlSymmetry" />
 
             <Space
                 android:layout_width="15dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
     </LinearLayout>
