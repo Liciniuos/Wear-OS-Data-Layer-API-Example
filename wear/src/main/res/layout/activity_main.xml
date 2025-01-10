@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content" />
 
             <!-- 48x48dp is the minimum touch surface size for android apps-->
-            <ImageButton
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/btnMark"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <ImageButton
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/btnDelete"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
